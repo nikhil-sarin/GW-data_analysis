@@ -2,6 +2,9 @@
 Vectorized versions of common tools used in gravitational-wave data analysis
 nikhil.sarin@ligo.org
 '''
+import numpy as np
+from scipy.interpolate import interp1d
+
 def nfft(ht, Fs):
     '''
     performs an FFT while keeping track of the frequency bins
@@ -33,7 +36,6 @@ def nfft(ht, Fs):
 def infft(hf, Fs):
     '''
     inverse FFT for use in conjunction with nfft
-    eric.thrane@ligo.org
     input:
     hf = single-side FFT calculated by fft_eht
     Fs = sampling frequency
@@ -95,7 +97,6 @@ def snr_exp(aa, freq, PSD):
 
 def snr_matchedfilter(hf, muf, f, Sh):
     '''
-    eric.thrane@ligo.org
     calculate matched filter SNR for template muf given data hf
     '''
     snr = inner_product(hf, muf, f, Sh) / np.sqrt(inner_product(muf, muf, f, Sh))
